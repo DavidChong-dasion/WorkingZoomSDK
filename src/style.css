@@ -9,9 +9,8 @@ body {
 
 video-player-container {
   display: flex;
-  gap: 10px; /* Add space between the videos /
-  
-  justify-content: center; / Center the videos / */
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: center;
   width: 100%;
   height: auto;
@@ -19,13 +18,15 @@ video-player-container {
 }
 
 video-player-container video {
-  margin-left: auto;
-  width: 40%;
-  height: auto;
+  width: 50%; 
+  height: 400px; 
+  float: left; 
+  aspect-ratio: 16/9;
 }
 
 video-player {
-  width: 40%;
-  height: auto;
+  width: 50%; 
+  height: 400px; 
+  float: left; 
   aspect-ratio: 16/9;
 }

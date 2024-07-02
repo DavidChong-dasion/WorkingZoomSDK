@@ -42,7 +42,10 @@ const renderVideo = async (event: { action: "Start" | "Stop"; userId: number; })
 const renderMp4Video = (mp4Src: string) => {
   const mp4Video = document.createElement('video');
   mp4Video.src = mp4Src;
-  mp4Video.controls = true;  // Add controls if needed
+
+  //Add play on click function
+  
+  mp4Video.controls = false;  // Add controls if needed
   videoContainer.appendChild(mp4Video);
 };
 
