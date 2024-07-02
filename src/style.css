@@ -8,22 +8,24 @@ body {
 }
 
 video-player-container {
+  display: flex;
+  gap: 10px; /* Add space between the videos /
+  
+  justify-content: center; / Center the videos / */
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  margin-left: auto; 
+}
+
+video-player-container video {
   margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
-  width: 80%;
-  display: grid !important;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-video-player-container:has(> :nth-child(2)) {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-video-player-container:has(> :nth-child(5)) {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 40%;
+  height: auto;
 }
 
 video-player {
-  width: 100%;
+  width: 40%;
   height: auto;
   aspect-ratio: 16/9;
 }

@@ -5,6 +5,8 @@ import "./style.css";
 const sdkKey = import.meta.env.VITE_SDK_KEY as string;
 const sdkSecret = import.meta.env.VITE_SDK_SECRET as string;
 const videoContainer = document.querySelector('video-player-container') as HTMLElement;
+console.log(videoContainer); // Debugging line
+
 const topic = "TestOne";
 const role = 1;
 const username = `User-${String(new Date().getTime()).slice(6)}`;
@@ -33,7 +35,15 @@ const renderVideo = async (event: { action: "Start" | "Stop"; userId: number; })
   } else {
     const userVideo = await mediaStream.attachVideo(event.userId, VideoQuality.Video_360P);
     videoContainer.appendChild(userVideo as VideoPlayer);
+    renderMp4Video('Part1.mp4');
   }
+};
+
+const renderMp4Video = (mp4Src: string) => {
+  const mp4Video = document.createElement('video');
+  mp4Video.src = mp4Src;
+  mp4Video.controls = true;  // Add controls if needed
+  videoContainer.appendChild(mp4Video);
 };
 
 const leaveCall = async () => {
