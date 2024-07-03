@@ -57,11 +57,27 @@ const renderVideo = async (event: { action: "Start" | "Stop"; userId: number; })
 };
 
 const renderMp4Video = (mp4Src: string) => {
+  // const mp4Video = document.createElement('video');
+  // mp4Video.src = mp4Src;
+
+  const existingMp4Video = document.getElementById('mp4Video');
+  if (existingMp4Video) {
+    existingMp4Video.remove();
+  }
+
+  // Create a new MP4 video element
   const mp4Video = document.createElement('video');
+  mp4Video.id = 'mp4Video'; // Assign an ID to the video element
   mp4Video.src = mp4Src;
 
-  //Add play on click function
-  
+  mp4Video.addEventListener('click', () => {
+    if (mp4Video.paused) {
+      mp4Video.play();
+    } else {
+      mp4Video.pause();
+    }
+  });
+
   mp4Video.controls = false;  // Add controls if needed
   videoContainer.appendChild(mp4Video);
 };
