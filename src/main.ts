@@ -25,7 +25,24 @@ const startCall = async () => {
   await mediaStream.startVideo();
   // render the video of the current user
   await renderVideo({ action: 'Start', userId: client.getCurrentUserInfo().userId });
+
+
+  // // Start audio transcription
+  // mediaStream.startAudioTranscription({
+  //   language: AudioTranscriptionLanguage.EN_US
+  // });
+
+  // // Handle transcription events
+  // client.on("transcription-result", handleTranscription);
 };
+
+// const handleTranscription = (event: any) => {
+//   const { speaker, text } = event;
+//   const transcriptionContainer = document.querySelector("#transcription-container") as HTMLElement;
+//   const transcriptionElement = document.createElement("p");
+//   transcriptionElement.textContent = `${speaker}: ${text}`;
+//   transcriptionContainer.appendChild(transcriptionElement);
+// };
 
 const renderVideo = async (event: { action: "Start" | "Stop"; userId: number; }) => {
   const mediaStream = client.getMediaStream();

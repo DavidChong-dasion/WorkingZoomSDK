@@ -16,6 +16,7 @@
 </head>
 
 <body class="flex flex-1 flex-col h-full min-h-screen relative">
+  <video-player-container></video-player-container>
   <h1 class="text-3xl font-bold text-center my-4">Dasion AI Avatar</h1>
   <div class="flex flex-row self-center">
     <button id="start-btn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4 w-64 self-center">
@@ -30,8 +31,9 @@
       Toggle Video
     </button>
   </div>
-  <video-player-container></video-player-container>
   
+  <!-- <div id="transcription-container" class="text-center mt-4"></div> -->
+
   <div class="text-center absolute bottom-2 w-full"></div>
   <script src="/coi-serviceworker.js"></script>
   <script type="module" src="/src/main.ts"></script>
