@@ -13,6 +13,8 @@ const username = `User-${String(new Date().getTime()).slice(6)}`;
 const client = ZoomVideo.createClient();
 await client.init("en-US", "Global", { patchJsMedia: true });
 
+let recordingInProgress = false;
+
 const startCall = async () => {
   // generate a token to join the session - in production this will be done by your backend
   const token = generateSignature(topic, role, sdkKey, sdkSecret);
@@ -26,23 +28,14 @@ const startCall = async () => {
   // render the video of the current user
   await renderVideo({ action: 'Start', userId: client.getCurrentUserInfo().userId });
 
+  await startRecording(
+    cloudRecording.startCloudRecording()
+  );
+  recordingInProgress = true;
 
-  // // Start audio transcription
-  // mediaStream.startAudioTranscription({
-  //   language: AudioTranscriptionLanguage.EN_US
-  // });
+ };
 
-  // // Handle transcription events
-  // client.on("transcription-result", handleTranscription);
-};
 
-// const handleTranscription = (event: any) => {
-//   const { speaker, text } = event;
-//   const transcriptionContainer = document.querySelector("#transcription-container") as HTMLElement;
-//   const transcriptionElement = document.createElement("p");
-//   transcriptionElement.textContent = `${speaker}: ${text}`;
-//   transcriptionContainer.appendChild(transcriptionElement);
-// };
 
 const renderVideo = async (event: { action: "Start" | "Stop"; userId: number; }) => {
   const mediaStream = client.getMediaStream();
@@ -90,7 +83,26 @@ const leaveCall = async () => {
   }
   client.off("peer-video-state-change", renderVideo);
   await client.leave();
+
+  if (recordingInProgress) {
+    await stopRecording(); // Call your backend endpoint to stop recording
+    recordingInProgress = false;
+  }
 }
+
+// Backend functions (replace with your actual backend integration)
+const startRecording = async () => {
+    cloudRecording.startCloudRecording()
+  // Implement a function to call your backend API to start recording
+  // Example: fetch('/startRecording', { method: 'POST', ... })
+};
+
+const stopRecording = async () => {
+  cloudRecording.stopCloudRecording()
+  // Implement a function to call your backend API to stop recording
+  // Example: fetch('/stopRecording', { method: 'POST', ... })
+};
+
 
 const toggleVideo = async () => {
   const mediaStream = client.getMediaStream();
